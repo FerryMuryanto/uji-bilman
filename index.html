@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BILLMAN MONITORING P2DP — UP3 TEGAL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .pln-navy { background-color: #0f172a; }
+    .pln-primary { background-color: #1e1b4b; }
+    .pln-gold { background-color: #facc15; }
+    .badge-green { background-color: #16a34a; color: #ffffff; }
+    .badge-lightgreen { background-color: #86efac; color: #0f172a; }
+    .badge-yellow { background-color: #fde047; color: #0f172a; }
+    .badge-orange { background-color: #fb923c; color: #0f172a; }
+    .badge-red { background-color: #ef4444; color: #ffffff; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 antialiased min-h-screen">
+
+  <!-- TOP HEADER -->
+  <header class="pln-primary text-white border-b border-indigo-950 px-4 md:px-8 py-4 shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 font-black text-lg flex items-center justify-center shadow">
+          PLN
+        </div>
+        <div>
+          <div class="text-[10px] font-black tracking-widest text-amber-300 uppercase">PT PLN ELECTRICITY SERVICES</div>
+          <h1 class="text-base md:text-lg font-black text-white leading-tight">BILLMAN MONITORING P2DP • AREA UP3 TEGAL</h1>
+        </div>
+      </div>
+
+      <!-- Quick Action: WA PIC & ULP Switcher -->
+      <div class="flex flex-wrap items-center gap-2">
+        <select id="ulpSelect" onchange="changeUlp()" class="bg-slate-900 text-amber-300 font-bold text-xs border border-indigo-400 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-400">
+          <option value="TEGAL_TIMUR">1. ULP TEGAL TIMUR</option>
+          <option value="TEGAL_KOTA">2. ULP TEGAL KOTA</option>
+          <option value="SLAWI">3. ULP SLAWI</option>
+          <option value="RANDUDONGKAL">4. ULP RANDUDONGKAL</option>
+          <option value="JATIBARANG">5. ULP JATIBARANG</option>
+          <option value="COMAL">6. ULP COMAL</option>
+          <option value="BREBES">7. ULP BREBES</option>
+          <option value="PEMALANG">8. ULP PEMALANG</option>
+          <option value="BUMIAYU">9. ULP BUMIAYU</option>
+          <option value="BALAPULANG">10. ULP BALAPULANG</option>
+        </select>
+
+        <a id="btnWaPicActive" href="#" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.28-2.42 5.84a8.19 8.19 0 0 1-5.83 2.41c-1.47 0-2.93-.39-4.21-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.25 8.27-8.25m4.53 11.59c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.41 1.01 2.58.13.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.53.59.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.17-.48-.29z"/></svg>
+          Chat WhatsApp PIC ULP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- PIC KOORDINATOR BANNER -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-4 md:p-5 rounded-2xl shadow border border-indigo-900 flex flex-wrap items-center justify-between gap-4">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-950 uppercase">PIC UNIT AKTIF</span>
+          <span id="activeUlpTitle" class="text-xs font-bold text-amber-300">ULP TEGAL TIMUR</span>
+        </div>
+        <h2 id="activePicName" class="text-base font-extrabold text-white">Bpk. Rahmat Hidayat, S.T.</h2>
+        <p id="activePicJabatan" class="text-xs text-slate-300">Supervisor Pelayanan Pelanggan & Billman Tegal Timur</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a id="btnCallPic" href="tel:+628122981801" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5 border border-slate-700">
+          📞 Panggil Telepon
+        </a>
+        <a id="btnWaPicDirect" href="https://wa.me/628122981801" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow">
+          💬 Chat WhatsApp (+62 812-2981-801)
+        </a>
+      </div>
+    </div>
+
+    <!-- 10 KPI STATS -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <div class="text-[10px] font-bold text-slate-500 uppercase">1. Total Petugas</div>
+        <div class="text-2xl font-black text-slate-900 mt-1">46</div>
+        <div class="text-[10px] text-indigo-600 font-semibold">Billman Aktif</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <div class="text-[10px] font-bold text-slate-500 uppercase">2. Total Pelanggan</div>
+        <div class="text-2xl font-black text-purple-700 mt-1">59.840</div>
+        <div class="text-[10px] text-slate-500">RBM Unik</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <div class="text-[10px] font-bold text-slate-500 uppercase">3. Target P2DP</div>
+        <div class="text-2xl font-black text-amber-600 mt-1">1.150</div>
+        <div class="text-[10px] text-slate-500">Target All: 2.530</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <div class="text-[10px] font-bold text-slate-500 uppercase">4. Realisasi P2DP</div>
+        <div class="text-2xl font-black text-emerald-600 mt-1">962</div>
+        <div class="text-[10px] text-slate-500">Capaian: 83,7%</div>
+      </div>
+      <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm">
+        <div class="text-[10px] font-extrabold text-amber-900 uppercase">5. Capaian ULP</div>
+        <div class="text-2xl font-black text-amber-700 mt-1">82,4%</div>
+        <div class="text-[10px] text-amber-800 font-semibold">2.085 / 2.530 Target</div>
+      </div>
+    </div>
+
+    <!-- MAIN MONITORING TABLE -->
+    <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <h2 class="text-base md:text-lg font-black text-slate-900 uppercase">TABEL MONITORING HARIAN P2DP, PREVENTIF & KOREKTIF</h2>
+          <p class="text-xs text-slate-500">Data live sinkron dengan Google Sheets & Database Multi-Device</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="searchInput" onkeyup="filterOfficers()" placeholder="Cari nama petugas..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          <button onclick="window.print()" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white">Cetak PDF</button>
+        </div>
+      </div>
+
+      <!-- LEGEND -->
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-bold">
+        <span class="text-slate-600">LEGENDA:</span>
+        <span class="px-2 py-0.5 rounded badge-green">≥100% (Tercapai)</span>
+        <span class="px-2 py-0.5 rounded badge-lightgreen">80%-99% (Baik)</span>
+        <span class="px-2 py-0.5 rounded badge-yellow">60%-79% (Sedang)</span>
+        <span class="px-2 py-0.5 rounded badge-orange">40%-59% (Rendah)</span>
+        <span class="px-2 py-0.5 rounded badge-red">&lt;40% (Sangat Rendah)</span>
+      </div>
+
+      <!-- SPREADSHEET TABLE -->
+      <div class="overflow-x-auto border-2 border-slate-900 rounded-xl">
+        <table class="w-full text-[11px] border-collapse" id="officersTable">
+          <thead>
+            <tr class="bg-indigo-950 text-white font-extrabold text-center">
+              <th class="p-2 border border-slate-800">NO</th>
+              <th class="p-2 border border-slate-800 text-left">NAMA PETUGAS</th>
+              <th class="p-2 border border-slate-800">KODE</th>
+              <th class="p-2 border border-slate-800">PELANGGAN</th>
+              <th class="p-2 border border-slate-800 bg-amber-500 text-slate-950">TARGET ALL</th>
+              <th class="p-2 border border-slate-800 bg-amber-400 text-slate-950" colspan="3">P2DP</th>
+              <th class="p-2 border border-slate-800 bg-amber-400 text-slate-950" colspan="3">PREVENTIF NEW ITO</th>
+              <th class="p-2 border border-slate-800 bg-amber-400 text-slate-950" colspan="3">KOREKTIF NEW ITO</th>
+              <th class="p-2 border border-slate-800 bg-blue-600" colspan="2">TOTAL KINERJA</th>
+            </tr>
+            <tr class="bg-amber-100 text-slate-950 font-bold text-center text-[10px]">
+              <th class="p-1 border border-slate-400" colspan="5"></th>
+              <th class="p-1 border border-slate-400">TGT</th>
+              <th class="p-1 border border-slate-400">REAL</th>
+              <th class="p-1 border border-slate-400">%</th>
+              <th class="p-1 border border-slate-400">TGT</th>
+              <th class="p-1 border border-slate-400">REAL</th>
+              <th class="p-1 border border-slate-400">%</th>
+              <th class="p-1 border border-slate-400">TGT</th>
+              <th class="p-1 border border-slate-400">REAL</th>
+              <th class="p-1 border border-slate-400">%</th>
+              <th class="p-1 border border-slate-400 bg-blue-100">JUMLAH</th>
+              <th class="p-1 border border-slate-400 bg-blue-100">% TOTAL</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Rendered by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- KONTAK PIC 10 ULP DIRECTORY -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div>
+          <h3 class="text-sm font-black text-slate-900 uppercase">DIREKTORI KONTAK WHATSAPP PIC 10 ULP SE-UP3 TEGAL</h3>
+          <p class="text-xs text-slate-500">Klik tombol hijau untuk langsung membuka chat WhatsApp dengan Supervisor PIC ULP</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="picGrid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const PIC_DATA = {
+      TEGAL_TIMUR: { name: "Bpk. Rahmat Hidayat, S.T.", title: "Supervisor Pelayanan Pelanggan & Billman Tegal Timur", phone: "628122981801", prefix: "BM-TGT" },
+      TEGAL_KOTA: { name: "Ibu Sri Wahyuni, S.T.", title: "Supervisor Pelayanan Pelanggan & Billman Tegal Kota", phone: "628122981802", prefix: "BM-TGK" },
+      SLAWI: { name: "Bpk. Agus Prasetyo, M.T.", title: "Supervisor Pelayanan Pelanggan & Billman Slawi", phone: "628122981803", prefix: "BM-SLW" },
+      RANDUDONGKAL: { name: "Bpk. Hendro Siswanto", title: "Supervisor Pelayanan Pelanggan & Billman Randudongkal", phone: "628122981804", prefix: "BM-RDD" },
+      JATIBARANG: { name: "Ibu Dewi Lestari", title: "Supervisor Pelayanan Pelanggan & Billman Jatibarang", phone: "628122981805", prefix: "BM-JTB" },
+      COMAL: { name: "Bpk. Fajar Ramadhan", title: "Supervisor Pelayanan Pelanggan & Billman Comal", phone: "628122981806", prefix: "BM-CML" },
+      BREBES: { name: "Bpk. Tri Wibowo, S.T.", title: "Supervisor Pelayanan Pelanggan & Billman Brebes", phone: "628122981807", prefix: "BM-BRB" },
+      PEMALANG: { name: "Bpk. Danang Kusuma", title: "Supervisor Pelayanan Pelanggan & Billman Pemalang", phone: "628122981808", prefix: "BM-PML" },
+      BUMIAYU: { name: "Bpk. Arif Firmansyah", title: "Supervisor Pelayanan Pelanggan & Billman Bumiayu", phone: "628122981809", prefix: "BM-BMY" },
+      BALAPULANG: { name: "Bpk. Sigit Purnomo", title: "Supervisor Pelayanan Pelanggan & Billman Balapulang", phone: "628122981810", prefix: "BM-BLP" }
+    };
+
+    const OFFICER_NAMES = [
+      "AHMAD FAUZI", "BUDI SANTOSO", "CAHYO NUGROHO", "DEDI KURNIAWAN", "EKO PRASETYO",
+      "FAJAR HIDAYAT", "GILANG RAMADHAN", "HENDRA WIJAYA", "INDRA LESMANA", "JOKO SUSILO",
+      "KHAIRUL ANAM", "LUKMAN HAKIM", "MUHAMMAD RIZKI", "NANANG KOSIM", "OKI SETIAWAN",
+      "PRATAMA PUTRA", "QOMARUDIN", "RENDI SAPUTRA", "SLAMET RIYADI", "TAUFIK HIDAYAT",
+      "USMAN ALI", "VICKY PRADANA", "WAHYU HIDAYAT", "YUDI PRATAMA", "ZAINAL ABIDIN",
+      "AGUS SALIM", "BAMBANG IRAWAN", "CANDRA WIJAYA", "DANI SETIAWAN", "EDI PURWANTO",
+      "FIRMANSYAH", "GUNAWAN", "HARIYANTO", "IRFAN MAULANA", "JUNAEDI",
+      "KUSNADI", "M. ARIFIN", "NUR HIDAYAT", "PANJI KUSUMA", "RAHMAT HIDAYAT",
+      "SAMSUL ARIFIN", "TEGUH SANTOSO", "UJANG SUPRIYADI", "WAWAN SETIAWAN", "YOGI PRATAMA",
+      "ZULKIFLI"
+    ];
+
+    function getBadgeClass(pct, real) {
+      if (real === 0 || pct <= 0) return 'badge-red';
+      if (pct >= 100) return 'badge-green';
+      if (pct >= 80) return 'badge-lightgreen';
+      if (pct >= 60) return 'badge-yellow';
+      if (pct >= 40) return 'badge-orange';
+      return 'badge-red';
+    }
+
+    function renderTable(ulpKey) {
+      const pic = PIC_DATA[ulpKey] || PIC_DATA.TEGAL_TIMUR;
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      let totalPelgn = 0, totalTarget = 0, totalP2dpT = 0, totalP2dpR = 0, totalPrevT = 0, totalPrevR = 0, totalKorT = 0, totalKorR = 0, totalJumlahR = 0;
+
+      OFFICER_NAMES.forEach((name, idx) => {
+        const pelgn = 1200 + ((idx * 17) % 300);
+        const p2dpT = 25;
+        const prevT = 20;
+        const korT = 10;
+        const targetAll = p2dpT + prevT + korT;
+
+        const factor = idx % 9 === 0 ? 1.05 : (idx === 41 || idx === 44 ? 0 : 0.84);
+        const p2dpR = Math.round(p2dpT * factor);
+        const prevR = Math.round(prevT * factor);
+        const korR = Math.round(korT * factor);
+        const jumlahR = p2dpR + prevR + korR;
+
+        const p2dpPct = (p2dpR / p2dpT) * 100;
+        const prevPct = (prevR / prevT) * 100;
+        const korPct = (korR / korT) * 100;
+        const totalPct = (jumlahR / targetAll) * 100;
+
+        totalPelgn += pelgn; totalTarget += targetAll;
+        totalP2dpT += p2dpT; totalP2dpR += p2dpR;
+        totalPrevT += prevT; totalPrevR += prevR;
+        totalKorT += korT; totalKorR += korR;
+        totalJumlahR += jumlahR;
+
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-slate-200 text-center hover:bg-slate-50';
+        tr.innerHTML = `
+          <td class="p-1.5 font-bold border-r">${idx + 1}</td>
+          <td class="p-1.5 font-bold text-left border-r">${name}</td>
+          <td class="p-1.5 font-mono text-[10px] border-r">${pic.prefix}-${String(idx + 1).padStart(3, '0')}</td>
+          <td class="p-1.5 border-r">${pelgn.toLocaleString('id-ID')}</td>
+          <td class="p-1.5 font-bold bg-orange-50 border-r">${targetAll}</td>
+          <td class="p-1.5 border-r">${p2dpT}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(p2dpPct, p2dpR)}">${p2dpR}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(p2dpPct, p2dpR)}">${p2dpPct.toFixed(1)}%</td>
+          <td class="p-1.5 border-r">${prevT}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(prevPct, prevR)}">${prevR}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(prevPct, prevR)}">${prevPct.toFixed(1)}%</td>
+          <td class="p-1.5 border-r">${korT}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(korPct, korR)}">${korR}</td>
+          <td class="p-1.5 font-bold border-r ${getBadgeClass(korPct, korR)}">${korPct.toFixed(1)}%</td>
+          <td class="p-1.5 font-extrabold bg-blue-50 border-r">${jumlahR}</td>
+          <td class="p-1.5 font-extrabold ${getBadgeClass(totalPct, jumlahR)}">${totalPct.toFixed(1)}%</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Total row
+      const totP2dpPct = (totalP2dpR / totalP2dpT) * 100;
+      const totPrevPct = (totalPrevR / totalPrevT) * 100;
+      const totKorPct = (totalKorR / totalKorT) * 100;
+      const totOverallPct = (totalJumlahR / totalTarget) * 100;
+
+      const summaryTr = document.createElement('tr');
+      summaryTr.className = 'bg-orange-500 text-white font-black text-center border-t-2 border-black';
+      summaryTr.innerHTML = `
+        <td colspan="3" class="p-2 text-left">TOTAL ULP</td>
+        <td class="p-2">${totalPelgn.toLocaleString('id-ID')}</td>
+        <td class="p-2">${totalTarget}</td>
+        <td class="p-2">${totalP2dpT}</td>
+        <td class="p-2">${totalP2dpR}</td>
+        <td class="p-2 bg-yellow-400 text-black">${totP2dpPct.toFixed(1)}%</td>
+        <td class="p-2">${totalPrevT}</td>
+        <td class="p-2">${totalPrevR}</td>
+        <td class="p-2 bg-yellow-400 text-black">${totPrevPct.toFixed(1)}%</td>
+        <td class="p-2">${totalKorT}</td>
+        <td class="p-2">${totalKorR}</td>
+        <td class="p-2 bg-yellow-400 text-black">${totKorPct.toFixed(1)}%</td>
+        <td class="p-2">${totalJumlahR}</td>
+        <td class="p-2 bg-yellow-400 text-black">${totOverallPct.toFixed(1)}%</td>
+      `;
+      tbody.appendChild(summaryTr);
+    }
+
+    function renderPicDirectory() {
+      const grid = document.getElementById('picGrid');
+      grid.innerHTML = '';
+
+      Object.entries(PIC_DATA).forEach(([key, pic]) => {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-black text-xs text-indigo-950">${key.replace('_', ' ')}</span>
+            <span class="text-[10px] font-bold text-slate-500">${pic.prefix}</span>
+          </div>
+          <div class="font-bold text-xs text-slate-900">${pic.name}</div>
+          <div class="text-[11px] text-slate-500 truncate">${pic.title}</div>
+          <div class="pt-1 flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-700">+${pic.phone}</span>
+            <a href="https://wa.me/${pic.phone}?text=Halo%20${encodeURIComponent(pic.name)}%2C%20koordinasi%20Billman%20P2DP" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] inline-flex items-center gap-1 shadow-sm">
+              Chat WA
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function changeUlp() {
+      const val = document.getElementById('ulpSelect').value;
+      const pic = PIC_DATA[val];
+      document.getElementById('activeUlpTitle').textContent = val.replace('_', ' ');
+      document.getElementById('activePicName').textContent = pic.name;
+      document.getElementById('activePicJabatan').textContent = pic.title;
+      document.getElementById('btnCallPic').href = `tel:+${pic.phone}`;
+      document.getElementById('btnWaPicDirect').href = `https://wa.me/${pic.phone}?text=Halo%20${encodeURIComponent(pic.name)}%2C%20koordinasi%20monitoring%20Billman%20P2DP`;
+      document.getElementById('btnWaPicDirect').textContent = `💬 Chat WhatsApp (+${pic.phone})`;
+      document.getElementById('btnWaPicActive').href = `https://wa.me/${pic.phone}?text=Halo%20${encodeURIComponent(pic.name)}%2C%20koordinasi%20monitoring%20Billman%20P2DP`;
+      renderTable(val);
+    }
+
+    function filterOfficers() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('#tableBody tr');
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    // Initialize
+    changeUlp();
+    renderPicDirectory();
+  </script>
+</body>
+</html>

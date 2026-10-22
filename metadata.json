@@ -1,0 +1,6 @@
+{
+  "name": "Billman P2DP",
+  "description": "Monitoring Kinerja Harian Billman P2DP, Preventif & Korektif New ITO UP3 Tegal PLN",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
